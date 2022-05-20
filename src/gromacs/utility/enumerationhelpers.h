@@ -86,7 +86,7 @@
 #if __has_include(<boost/stl_interfaces/iterator_interface.hpp>)
 #    include <boost/stl_interfaces/iterator_interface.hpp>
 #else // fallback for installed headers
-#    include <gromacs/external/boost/stl_interfaces/iterator_interface.hpp>
+#    include <external/boost/stl_interfaces/iterator_interface.hpp>
 #endif
 
 #include "gromacs/utility/gmxassert.h"

@@ -198,7 +198,7 @@ void Propagator<IntegrationStage::PositionsOnly>::run()
     int nth    = gmx_omp_nthreads_get(ModuleMultiThread::Update);
     int homenr = mdAtoms_->mdatoms()->homenr;
 
-#pragma omp parallel for num_threads(nth) schedule(static) default(none) shared(nth, homenr, x, xp, v)
+#pragma omp parallel for num_threads(nth) schedule(static) default(shared) shared(nth, homenr, x, xp, v)
     for (int th = 0; th < nth; th++)
     {
         try
@@ -234,7 +234,7 @@ void Propagator<IntegrationStage::ScalePositions>::run()
     int nth    = gmx_omp_nthreads_get(ModuleMultiThread::Update);
     int homenr = mdAtoms_->mdatoms()->homenr;
 
-#pragma omp parallel for num_threads(nth) schedule(static) default(none) shared(nth, homenr, x) \
+#pragma omp parallel for num_threads(nth) schedule(static) default(shared) shared(nth, homenr, x) \
         firstprivate(lambda)
     for (int th = 0; th < nth; th++)
     {
@@ -288,9 +288,9 @@ void Propagator<IntegrationStage::VelocitiesOnly>::run()
 // const variables are best shared and MSVC requires it, but gcc-8 & gcc-9 don't agree how to write
 // that... https://www.gnu.org/software/gcc/gcc-9/porting_to.html -> OpenMP data sharing
 #if defined(__GNUC__) && !defined(__clang__) && __GNUC__ < 9
-#    pragma omp parallel for num_threads(nth) schedule(static) default(none) shared(v, f, invMassPerDim)
+#    pragma omp parallel for num_threads(nth) schedule(static) default(shared) shared(v, f, invMassPerDim)
 #else
-#    pragma omp parallel for num_threads(nth) schedule(static) default(none) shared(v, f, invMassPerDim) \
+#    pragma omp parallel for num_threads(nth) schedule(static) default(shared) shared(v, f, invMassPerDim) \
             shared(nth, homenr, lambdaStart, lambdaEnd, isFullScalingMatrixDiagonal)
 #endif
     for (int th = 0; th < nth; th++)
@@ -374,7 +374,7 @@ void Propagator<IntegrationStage::LeapFrog>::run()
 
 // const variables could be shared, but gcc-8 & gcc-9 don't agree how to write that...
 // https://www.gnu.org/software/gcc/gcc-9/porting_to.html -> OpenMP data sharing
-#pragma omp parallel for num_threads(nth) schedule(static) default(none) \
+#pragma omp parallel for num_threads(nth) schedule(static) default(shared) \
         shared(x, xp, v, f, invMassPerDim)                               \
                 firstprivate(nth, homenr, lambdaStart, lambdaEnd, isFullScalingMatrixDiagonal)
     for (int th = 0; th < nth; th++)
@@ -459,7 +459,7 @@ void Propagator<IntegrationStage::VelocityVerletPositionsAndVelocities>::run()
 
 // const variables could be shared, but gcc-8 & gcc-9 don't agree how to write that...
 // https://www.gnu.org/software/gcc/gcc-9/porting_to.html -> OpenMP data sharing
-#pragma omp parallel for num_threads(nth) schedule(static) default(none) \
+#pragma omp parallel for num_threads(nth) schedule(static) default(shared) \
         shared(x, xp, v, f, invMassPerDim)                               \
                 firstprivate(nth, homenr, lambdaStart, lambdaEnd, isFullScalingMatrixDiagonal)
     for (int th = 0; th < nth; th++)
@@ -538,7 +538,7 @@ void Propagator<IntegrationStage::ScaleVelocities>::run()
 
 // const variables could be shared, but gcc-8 & gcc-9 don't agree how to write that...
 // https://www.gnu.org/software/gcc/gcc-9/porting_to.html -> OpenMP data sharing
-#pragma omp parallel for num_threads(nth) schedule(static) default(none) shared(v) \
+#pragma omp parallel for num_threads(nth) schedule(static) default(shared) shared(v) \
         firstprivate(nth, homenr, lambdaStart)
     for (int th = 0; th < nth; th++)
     {

@@ -552,6 +552,8 @@ static void pr_expandedvals(FILE* fp, int indent, const t_expanded* expand, int 
     pr_indent(fp, indent);
     pr_rvec(fp, indent, "init-lambda-weights", expand->init_lambda_weights.data(), n_lambda, TRUE);
     PS("init-weights", EBOOL(expand->bInit_weights));
+    pr_rvec(fp, indent, "init-histogram-counts", expand->init_histogram_counts.data(), n_lambda, TRUE);
+    PS("init-counts", EBOOL(expand->bInit_counts));
 }
 
 static void pr_fepvals(FILE* fp, int indent, const t_lambda* fep, gmx_bool bMDPformat)
@@ -1278,6 +1280,7 @@ static void cmp_expandedvals(FILE*             fp,
     int i;
 
     cmp_bool(fp, "inputrec->fepvals->bInit_weights", -1, expand1->bInit_weights, expand2->bInit_weights);
+    cmp_bool(fp, "inputrec->fepvals->bInit_counts", -1, expand1->bInit_counts, expand2->bInit_counts);
     cmp_bool(fp, "inputrec->fepvals->bWLoneovert", -1, expand1->bWLoneovert, expand2->bWLoneovert);
 
     for (i = 0; i < n_lambda; i++)
@@ -1289,6 +1292,12 @@ static void cmp_expandedvals(FILE*             fp,
                  expand2->init_lambda_weights[i],
                  ftol,
                  abstol);
+    }
+
+    for (i = 0; i < n_lambda; i++)
+    {
+        cmp_real(fp, "inputrec->expandedvals->init_histogram_counts", -1,
+                 expand1->init_histogram_counts[i], expand2->init_histogram_counts[i], ftol, abstol);
     }
 
     cmpEnum(fp, "inputrec->expandedvals->lambda-stats", expand1->elamstats, expand2->elamstats);

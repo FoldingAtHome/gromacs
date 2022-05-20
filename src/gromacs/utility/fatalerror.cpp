@@ -189,16 +189,15 @@ void gmx_exit_on_fatal_error(ExitType exitType, int returnValue)
     }
 #endif
 
-    if (!GMX_FAHCORE)
+    if (GMX_FAHCORE) returnValue = 121; // FAH UNKNOWN_ERROR
+
+    if (exitType == ExitType_CleanExit)
     {
-        if (exitType == ExitType_CleanExit)
-        {
-            std::exit(returnValue);
-        }
+        std::exit(returnValue);
+    }
         // We cannot use std::exit() if other threads may still be executing, since that would cause
         // destructors to be called for global objects that may still be in use elsewhere.
-        std::_Exit(returnValue);
-    }
+    std::_Exit(returnValue);
 }
 
 void gmx_fatal_mpi_va(int /*f_errno*/,

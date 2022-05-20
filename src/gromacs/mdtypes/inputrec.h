@@ -213,10 +213,12 @@ struct t_expanded
     bool bWLoneovert = false;
     //! Did we initialize the weights? TODO: REMOVE FOR 5.0, no longer needed with new logic
     bool bInit_weights = false;
+    bool bInit_counts = false;
     //! To override the main temperature, or define it if it's not defined
     real mc_temp = 0;
     //! User-specified initial weights to start with
     std::vector<real> init_lambda_weights;
+    std::vector<real> init_histogram_counts;
 };
 
 struct t_rotgrp

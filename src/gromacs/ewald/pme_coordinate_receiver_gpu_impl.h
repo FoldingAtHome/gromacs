@@ -43,6 +43,7 @@
 #define GMX_PMECOORDINATERECEIVERGPU_IMPL_H
 
 #include <vector>
+#include <tuple>
 
 #include "gromacs/ewald/pme_coordinate_receiver_gpu.h"
 #include "gromacs/utility/arrayref.h"

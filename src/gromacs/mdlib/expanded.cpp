@@ -61,6 +61,8 @@ static void init_df_history_weights(df_history_t* dfhist, const t_expanded* expa
     {
         dfhist->sum_weights[i] = expand->init_lambda_weights[i];
         dfhist->sum_dg[i]      = expand->init_lambda_weights[i];
+        dfhist->n_at_lam[i]    = (int)expand->init_histogram_counts[i]; /* Check this logic for gibbs sampler. . . */
+        dfhist->wl_histo[i]    = expand->init_histogram_counts[i];
     }
 }
 
