@@ -238,7 +238,8 @@ static std::string getSourceRootPath(const std::string& sourceRelativePath)
                                  "kernels are found, but '%s' does not exist",
                                  gmxOclFilePath)));
         }
-        sourceRootPath = Path::join(gmxOclFilePath, sourceRelativePath);
+        if (sourceRelativePath.empty()) sourceRootPath = gmxOclFilePath;
+        else sourceRootPath = Path::join(gmxOclFilePath, sourceRelativePath);
     }
 
     // Make sure we return an OS-correct path format
