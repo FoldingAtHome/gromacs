@@ -135,7 +135,7 @@ enum ExitType
  * \param[in] returnValue  Exit code for the program, for cases where it can be
  *    used.
  */
-[[noreturn]] void gmx_exit_on_fatal_error(enum ExitType exitType, int returnValue);
+void gmx_exit_on_fatal_error(enum ExitType exitType, int returnValue);
 
 /*! \brief
  * Low-level fatal error reporting routine for collective MPI errors.
@@ -151,7 +151,7 @@ enum ExitType
  *
  * This function is deprecated and no new calls should be made to it.
  */
-[[noreturn]] void gmx_fatal_mpi_va(int                          fatal_errno,
+void gmx_fatal_mpi_va(int                          fatal_errno,
                                    const std::filesystem::path& file,
                                    int                          line,
                                    gmx_bool                     bMain,
@@ -182,7 +182,7 @@ enum ExitType
    gmx_fatal(FARGS, fmt, ...);
    \endcode
  */
-[[noreturn]] void
+void
 gmx_fatal(int fatal_errno, const std::filesystem::path& file, int line, gmx_fmtstr const char* fmt, ...)
         gmx_format(printf, 4, 5);
 /** Helper macro to pass first three parameters to gmx_fatal(). */
@@ -191,7 +191,7 @@ gmx_fatal(int fatal_errno, const std::filesystem::path& file, int line, gmx_fmts
 /*! \brief Implementation for gmx_error().
  *
  * This function is deprecated and no new calls should be made to it. */
-[[noreturn]] void gmx_error_function(const char*                  key,
+void gmx_error_function(const char*                  key,
                                      const std::string&           msg,
                                      const std::filesystem::path& file,
                                      int                          line);
