@@ -205,7 +205,7 @@ void do_md_trajectory_writing(FILE*                          fplog,
 #if GMX_FAHCORE
     if (MAIN(cr))
     {
-        fcWriteVisFrame(ir->pbcType, state_global->box, top_global, state_global->x.rvec_array());
+        fcWriteVisFrame(ir->pbcType, state_global->box, &top_global, state_global->x.rvec_array());
     }
 #endif
 }

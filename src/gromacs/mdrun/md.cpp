@@ -2147,7 +2147,7 @@ void gmx::LegacySimulator::do_md()
         observablesReducer.markAsReadyToReduce();
 
 #if GMX_FAHCORE
-        if (MAIN(cr))
+        if (MAIN(cr_))
         {
             fcReportProgress(ir->nsteps + ir->init_step, step);
         }

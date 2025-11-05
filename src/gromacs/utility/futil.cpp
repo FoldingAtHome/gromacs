@@ -570,13 +570,6 @@ void gmx_file_rename(const std::filesystem::path& oldname, const std::filesystem
 {
     std::error_code errorCode;
     std::filesystem::rename(oldname, newname, errorCode);
-#if GMX_FAHCORE
-    /* This just lets the F@H checksumming system know about the rename */
-    if (errorCode.value() == 0)
-    {
-        fcRename(oldname.string().c_str(), newname.string().c_str());
-    }
-#endif
     if (errorCode.value() != 0)
     {
         auto errorMsg = gmx::formatString(
