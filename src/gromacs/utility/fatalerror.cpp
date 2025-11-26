@@ -45,6 +45,7 @@
 #include <cstring>
 
 #include <exception>
+#include <stdexcept>
 #include <filesystem>
 #include <mutex>
 #include <string>
@@ -196,7 +197,8 @@ void gmx_exit_on_fatal_error(ExitType exitType, int returnValue)
     }
 #endif
 
-    if (!GMX_FAHCORE)
+    if (GMX_FAHCORE) throw std::runtime_error("GROMACS fatal error");
+    else
     {
         if (exitType == ExitType_CleanExit)
         {
