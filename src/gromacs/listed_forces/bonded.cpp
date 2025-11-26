@@ -2557,6 +2557,7 @@ real unimplemented(int gmx_unused             nbonds,
                    int gmx_unused*          global_atom_index)
 {
     gmx_impl("*** you are using a not implemented function");
+    return 0;
 }
 
 template<BondedKernelFlavor flavor>
