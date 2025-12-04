@@ -71,8 +71,6 @@
 #endif
 
 #if GMX_FAHCORE
-#    define FULLINDIRECT 1
-#    define USE_FAH_XDR 1
-#    include "swindirect.h"
+#    include "corewrap.h"
 #endif
 //! \endcond

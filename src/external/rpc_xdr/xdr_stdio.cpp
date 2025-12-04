@@ -56,6 +56,10 @@
  * - removing headers that are no longer necessary.
  */
 
+#if GMX_FAHCORE
+  #include "corewrap.h"
+#endif
+
 #include "types.h"
 #include <stdio.h>
 #include "xdr.h"

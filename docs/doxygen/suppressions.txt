@@ -58,7 +58,7 @@ src/gromacs/modularsimulator/signallers.h: error: build: is documented, but does
 # src/gromacs/tables/quadraticsplinetable.h: warning: includes "simd.h" unnecessarily
 
 # # These are specific to Folding@Home, and easiest to suppress here
-# src/gmxpre.h: warning: includes non-local file as "swindirect.h"
+# src/gmxpre.h: warning: includes non-local file as "corewrap.h"
 
 # # New external API (see https://gitlab.com/gromacs/gromacs/-/issues/2586) has some unresolved
 # # conflicts with previous definitions of public API, installed API, and other things

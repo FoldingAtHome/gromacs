@@ -940,7 +940,7 @@ mark_as_advanced(GMX_NACL)
 
 if(GMX_FAHCORE)
   set(COREWRAP_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/../corewrap" CACHE STRING
-      "Path to swindirect.h")
+      "Path to corewrap.h")
   include_directories(${COREWRAP_INCLUDE_DIR})
 endif()
 
